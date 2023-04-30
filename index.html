@@ -1,13 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Cinematic</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/phaser/3.60.0/phaser.js" integrity="sha512-H05oT7BAjM9Ai1IaFX9zr61NtE2e1P0MkTz3AZXBnseaJSAOt2FGMFJ+vVGutaJxEGA1jxUiYsTBYQNE08/Erw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script>
-    class Atalgame extends Phaser.Scene {
+class Atalgame extends Phaser.Scene {
     preload(){
         this.load.path = './assets/';
         this.load.image('Bullet', 'Bullet.png');
@@ -18,6 +9,8 @@
         this.load.image('map','map2.png');
         this.load.image('table','table.png');
         this.load.image('menu','menu.png');
+        this.load.audio("ding", 'coin.mp3');
+        this.load.audio("gun", 'gun.mp3');
     }
     create(){
         this.graphics = this.add.graphics();
@@ -215,6 +208,15 @@
                 //shadow: { stroke: true, offsetX: -3, offsetY: 2, color: '#000000', fill: true, blur: 3 },
             } //style
         );
+        const gunsound = this.sound.add('gun', );
+
+        const coinsound = this.sound.add('ding');
+
+        gunsound.play();
+        coinsound.play();
+       
+        
+
         this.tweens.add({
             targets: this.textObject,
             x:120,
@@ -395,6 +397,7 @@
                 //shadow: { stroke: true, offsetX: -3, offsetY: 2, color: '#000000', fill: true, blur: 3 },
             } //style
         );
+        //ding.play();
         this.tweens.add({
             targets: this.textObject,
             x:520,
@@ -566,9 +569,3 @@ let config = {
 }
 
 let game = new Phaser.Game(config);
-</script>
-</head>
-<body>
-    
-</body>
-</html>
