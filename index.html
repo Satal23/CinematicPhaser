@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Example Cinematic</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/phaser/3.60.0/phaser.js" integrity="sha512-H05oT7BAjM9Ai1IaFX9zr61NtE2e1P0MkTz3AZXBnseaJSAOt2FGMFJ+vVGutaJxEGA1jxUiYsTBYQNE08/Erw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script>
+    class Atalgame extends Phaser.Scene {
+    preload(){
+        this.load.path = './assets/';
+        this.load.image('Bullet', 'Bullet.png');
+        this.load.image('player','guy.png');
+        this.load.image('enemy', 'enemy.png');
+        this.load.image('chest', 'chest.png');
+        this.load.image('heart', 'heart.png');
+        this.load.image('map','map2.png');
+        this.load.image('table','table.png');
+        this.load.image('menu','menu.png');
+    }
+    create(){
+        this.graphics = this.add.graphics();
+        // add shapes
+        //this.graphics.fillEllipse(450, 100, 200, 100, 16); 
+        //this.graphics.fillStyle(0xff9900, 1); //color, opacity
+        //this.graphics.fillCircle(100,100,50);   //x, y, radius
+        //this.graphics.fillTriangle(250, 50, 200, 150, 300, 150); //x1, y1, x2, y2, x3, y3
+        //this.graphics.fillEllipse(450, 100, 200, 100, 30);   // x, y, width, height, smoothness
+
+        //this.graphics.lineStyle(5, 0x000000, 1);    //linewidth, color, opacity
+        //this.graphics.lineBetween(100,100,250,100); //x1, y1, x2, y2
+        //this.graphics.lineStyle(5, 0x000000, 0.5);
+        //this.graphics.lineBetween(250,100,450,100); 
+
+        // add gradiant shapes
+        // topleftcolor, toprightcolor, bottomleftcolor, bottomrightcolor, topleftopacity, toprightopacity, bottomleftopacity, bottomrightopacity 
+        //this.graphics.fillGradientStyle(0xff0000, 0xff0000, 0xff0000,0xff0000, 1, 1, 0.1, 0.1); 
+        //this.graphics.fillRect(600,50,150,100); //x1,y1, width, height
+
+        //create image object 
+        this.imageObject = this.add.image(
+            0,//x
+            250,//y
+            'Bullet',//imagename
+        )
+
+        this.imageObject.setScale(0.8) //resize
+        
+        //create text object
+        this.textObject = this.add.text(
+            -320, //x
+            370,//y
+            " FastBullet Studios", //text
+            {
+                font: "40px Oswald",
+                color: "#000000",
+                stroke: '#ffffff',
+			    strokeThickness: 2,
+                shadow: { stroke: true, offsetX: -3, offsetY: 2, color: '#000000', fill: true, blur: 3 },
+            } //style
+        );
+        // Add tweens
+        //fade tweens
+        //this.tweens.add({
+        //    targets: this.textObject,
+        //    alpha:0,
+        //    duration: 5000,
+        //    ease: 'Linear',
+        //    repeat: -1,
+        //});
+        this.tweens.add({
+            targets: this.textObject,
+            x:270,
+            y:370,
+            delay: 2300,
+            duration: 500,
+            ease: 'Linear',
+            repeat: 0,
+        });
+        this.tweens.add({
+            targets: this.imageObject,
+            x:1000,
+            y:250,
+            duration: 250,
+            ease: 'linear',
+            repeat: 5,
+        });
+        this.imageObject = this.add.image(
+            -160,//x
+            250,//y
+            'Bullet',//imagename
+        )
+        this.imageObject.setScale(0.8) //resize
+        this.tweens.add({
+            targets: this.imageObject,
+            x:400,
+            y:250,
+            delay: 1500,
+            duration: 500,
+            ease: 'linear',
+            repeat: 0,
+        });
+        //fade tweens
+        this.tweens.add({
+            targets: this.textObject,
+            delay:3500,
+            alpha:0,
+            duration: 800,
+            ease: 'Linear',
+            repeat: 0,
+        });
+        this.tweens.add({
+            targets: this.imageObject,
+            delay:3500,
+            alpha:0,
+            duration: 800,
+            ease: 'Linear',
+            repeat: 0,
+        });
+        this.textObject = this.add.text(
+            320, //x
+            -50,//y
+            " Characters", //text
+            {
+                font: "40px Oswald",
+                color: "#000000",
+                stroke: '#ffffff',
+			    strokeThickness: 2,
+                shadow: { stroke: true, offsetX: -3, offsetY: 2, color: '#000000', fill: true, blur: 3 },
+            } //style
+        );
+        this.tweens.add({
+            targets: this.textObject,
+            x:320,
+            y:30,
+            delay: 4500,
+            duration: 500,
+            ease: 'linear',
+            repeat: 0,
+        });
+        this.tweens.add({
+            targets: this.textObject,
+            delay:12000,
+            alpha:0,
+            duration: 800,
+            ease: 'Linear',
+            repeat: 0,
+        });
+        this.imageObject = this.add.image(
+            -100,//x
+            250,//y
+            'player',//imagename
+        )
+        //this.imageObject.visible = false;
+        this.tweens.add({
+            targets: this.imageObject,
+            delay:6000,
+            duration: 800,
+            ease: 'Linear',
+            repeat: 0,
+            x:200,
+            y:250
+        });
+        this.tweens.add({
+            targets: this.imageObject,
+            delay:12000,
+            alpha:0,
+            duration: 800,
+            ease: 'Linear',
+            repeat: 0,
+        });
+        this.imageObject = this.add.image(
+            900,//x
+            250,//y
+            'enemy',//imagename
+        )
+        //this.imageObject.visible = false;
+        this.tweens.add({
+            targets: this.imageObject,
+            delay:6000,
+            duration: 800,
+            ease: 'Linear',
+            repeat: 0,
+            x:600,
+            y:250
+        });
+        this.tweens.add({
+            targets: this.imageObject,
+            delay:12000,
+            alpha:0,
+            duration: 800,
+            ease: 'Linear',
+            repeat: 0,
+        });
+        this.imageObject.setScale(0.8);
+        const content = [
+            "Player Character",
+            "The player character able to",
+            "dodge roll and fire its default",
+            "weapon with infinite ammo.",
+            " (weapons found on maps have",
+            "limited ammo)"
+
+        ]
+        this.textObject = this.add.text(
+            120, //x
+            600,//y
+            content, //text
+            {
+                font: "20px Oswald",
+                color: "#000000",
+                stroke: '#ffffff',
+			    strokeThickness: 2,
+                //shadow: { stroke: true, offsetX: -3, offsetY: 2, color: '#000000', fill: true, blur: 3 },
+            } //style
+        );
+        this.tweens.add({
+            targets: this.textObject,
+            x:120,
+            y:330,
+            delay: 7000,
+            duration: 600,
+            ease: 'linear',
+            repeat: 0,
+        });
+        this.tweens.add({
+            targets: this.textObject,
+            delay:12000,
+            alpha:0,
+            duration: 800,
+            ease: 'Linear',
+            repeat: 0,
+        });
+        const content2 = [
+            "Enemies",
+            "Spawns with various health, ",
+        ]
+        this.textObject = this.add.text(
+            520, //x
+            600,//y
+            content2, //text
+            {
+                font: "20px Oswald",
+                color: "#000000",
+                stroke: '#ffffff',
+			    strokeThickness: 2,
+                //shadow: { stroke: true, offsetX: -3, offsetY: 2, color: '#000000', fill: true, blur: 3 },
+            } //style
+        );
+        this.tweens.add({
+            targets: this.textObject,
+            x:520,
+            y:330,
+            delay: 7000,
+            duration: 600,
+            ease: 'linear',
+            repeat: 0,
+        });
+        this.tweens.add({
+            targets: this.textObject,
+            delay:12000,
+            alpha:0,
+            duration: 800,
+            ease: 'Linear',
+            repeat: 0,
+        });
+
+        this.textObject = this.add.text(
+            300, //x
+            -50,//y
+            " World Elements", //text
+            {
+                font: "40px Oswald",
+                color: "#000000",
+                stroke: '#ffffff',
+			    strokeThickness: 2,
+                shadow: { stroke: true, offsetX: -3, offsetY: 2, color: '#000000', fill: true, blur: 3 },
+            } //style
+        );
+        this.tweens.add({
+            targets: this.textObject,
+            x:300,
+            y:30,
+            delay: 13000,
+            duration: 500,
+            ease: 'linear',
+            repeat: 0,
+        });
+        this.tweens.add({
+            targets: this.textObject,
+            delay:20000,
+            alpha:0,
+            duration: 800,
+            ease: 'Linear',
+            repeat: 0,
+        });
+        this.imageObject = this.add.image(
+            -100,//x
+            200,//y
+            'table',//imagename
+        )
+        //this.imageObject.visible = false;
+        this.tweens.add({
+            targets: this.imageObject,
+            delay:14500,
+            duration: 800,
+            ease: 'Linear',
+            repeat: 0,
+            x:200,
+            y:200
+        });
+        this.tweens.add({
+            targets: this.imageObject,
+            delay:20000,
+            alpha:0,
+            duration: 800,
+            ease: 'Linear',
+            repeat: 0,
+        });
+        this.imageObject = this.add.image(
+            900,//x
+            200,//y
+            'chest',//imagename
+        )
+        //this.imageObject.visible = false;
+        this.tweens.add({
+            targets: this.imageObject,
+            delay:14500,
+            duration: 800,
+            ease: 'Linear',
+            repeat: 0,
+            x:600,
+            y:200
+        });
+        this.tweens.add({
+            targets: this.imageObject,
+            delay:20000,
+            alpha:0,
+            duration: 800,
+            ease: 'Linear',
+            repeat: 0,
+        });
+        this.imageObject.setScale(0.8);
+        const content3 = [
+            "Obstacles(Chair/table)",
+            "Blocks Projectiles allowing player to ",
+            "use it as protection.",
+
+        ]
+        this.textObject = this.add.text(
+            120, //x
+            600,//y
+            content3, //text
+            {
+                font: "17px Oswald",
+                color: "#000000",
+                stroke: '#ffffff',
+			    strokeThickness: 2,
+                //shadow: { stroke: true, offsetX: -3, offsetY: 2, color: '#000000', fill: true, blur: 3 },
+            } //style
+        );
+        this.tweens.add({
+            targets: this.textObject,
+            x:120,
+            y:260,
+            delay: 15500,
+            duration: 600,
+            ease: 'linear',
+            repeat: 0,
+        });
+        this.tweens.add({
+            targets: this.textObject,
+            delay:20000,
+            alpha:0,
+            duration: 800,
+            ease: 'Linear',
+            repeat: 0,
+        });
+        const content4 = [
+            "Interactables(Chest)",
+            "Chests can be unlocked to",
+            "receive items such as health,",
+            "shield, and new weapons.",
+        ]
+        this.textObject = this.add.text(
+            520, //x
+            600,//y
+            content4, //text
+            {
+                font: "17px Oswald",
+                color: "#000000",
+                stroke: '#ffffff',
+			    strokeThickness: 2,
+                //shadow: { stroke: true, offsetX: -3, offsetY: 2, color: '#000000', fill: true, blur: 3 },
+            } //style
+        );
+        this.tweens.add({
+            targets: this.textObject,
+            x:520,
+            y:260,
+            delay: 15500,
+            duration: 600,
+            ease: 'linear',
+            repeat: 0,
+        });
+        this.tweens.add({
+            targets: this.textObject,
+            delay:20000,
+            alpha:0,
+            duration: 800,
+            ease: 'Linear',
+            repeat: 0,
+        });
+        this.imageObject = this.add.image(
+            410,//x
+            630,//y
+            'heart',//imagename
+        )
+        //this.imageObject.visible = false;
+        this.tweens.add({
+            targets: this.imageObject,
+            delay:14500,
+            duration: 800,
+            ease: 'Linear',
+            repeat: 0,
+            x:410,
+            y:400
+        });
+        this.tweens.add({
+            targets: this.imageObject,
+            delay:20000,
+            alpha:0,
+            duration: 800,
+            ease: 'Linear',
+            repeat: 0,
+        });
+        const content5 = [
+            "Consumables(Health)",
+            "Placed throughout the map to ",
+            "help the Player progress. Ex. ",
+            "Health, Ammo, Weapons, ",
+            "Shield."
+        ]
+        this.textObject = this.add.text(
+            320, //x
+            600,//y
+            content5, //text
+            {
+                font: "17px Oswald",
+                color: "#000000",
+                stroke: '#ffffff',
+			    strokeThickness: 2,
+                //shadow: { stroke: true, offsetX: -3, offsetY: 2, color: '#000000', fill: true, blur: 3 },
+            } //style
+        );
+        this.tweens.add({
+            targets: this.textObject,
+            x:320,
+            y:430,
+            delay: 15500,
+            duration: 600,
+            ease: 'linear',
+            repeat: 0,
+        });
+        this.tweens.add({
+            targets: this.textObject,
+            delay:20000,
+            alpha:0,
+            duration: 800,
+            ease: 'Linear',
+            repeat: 0,
+        });
+
+        this.textObject = this.add.text(
+            300, //x
+            -50,//y
+            " World Design", //text
+            {
+                font: "40px Oswald",
+                color: "#000000",
+                stroke: '#ffffff',
+			    strokeThickness: 2,
+                shadow: { stroke: true, offsetX: -3, offsetY: 2, color: '#000000', fill: true, blur: 3 },
+            } //style
+        );
+        this.tweens.add({
+            targets: this.textObject,
+            x:300,
+            y:30,
+            delay: 21500,
+            duration: 500,
+            ease: 'linear',
+            repeat: 0,
+        });
+        this.tweens.add({
+            targets: this.textObject,
+            delay: 25000,
+            alpha:0,
+            duration: 800,
+            ease: 'Linear',
+            repeat: 0,
+        });
+        this.imageObject = this.add.image(
+            410,//x
+            795,//y
+            'map',//imagename
+        )
+        this.imageObject.setScale(0.47)
+        //this.imageObject.visible = false;
+        this.tweens.add({
+            targets: this.imageObject,
+            delay: 22000,
+            duration: 800,
+            ease: 'Linear',
+            repeat: 0,
+            x:410,
+            y:350
+        });
+        this.tweens.add({
+            targets: this.imageObject,
+            delay:25000,
+            alpha:0,
+            duration: 800,
+            ease: 'Linear',
+            repeat: 0,
+        });
+        this.imageObject = this.add.image(
+            410,//x
+            795,//y
+            'menu',//imagename
+        )
+        this.imageObject.setScale(0.7)
+        //this.imageObject.visible = false;
+        this.tweens.add({
+            targets: this.imageObject,
+            delay: 26000,
+            duration: 800,
+            ease: 'Linear',
+            repeat: 0,
+            x:410,
+            y:380
+        });
+        this.tweens.add({
+            targets: this.imageObject,
+            delay:30000,
+            alpha:0,
+            duration: 800,
+            ease: 'Linear',
+            repeat: 0,
+        });
+    }
+    update(){}
+}
+let config = {
+    type: Phaser.WEBGL,
+    scale: {
+        mode: Phaser.Scale.FIT,
+        parent: 'phaser-example',
+        autoCenter: Phaser.Scale.CENTER_BOTH,
+        width: 800,
+        height: 600
+    },
+    backgroundColor: 0xffffff,
+    scene: Atalgame,
+}
+
+let game = new Phaser.Game(config);
+</script>
+</head>
+<body>
+    
+</body>
+</html>
